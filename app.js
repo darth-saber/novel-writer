@@ -4,7 +4,13 @@
 const AppData = {
   chapters: [],
   characters: [],
+  locations: [],
   plotPoints: [],
+  goals: {
+    dailyWordGoal: 1000,
+    weeklyWordGoal: 7000,
+  },
+  sessions: [],
   currentChapterId: null,
   settings: {
     fontSize: "16",
@@ -29,7 +35,10 @@ function loadDataFromStorage() {
     const parsed = JSON.parse(savedData);
     AppData.chapters = parsed.chapters || [];
     AppData.characters = parsed.characters || [];
+    AppData.locations = parsed.locations || [];
     AppData.plotPoints = parsed.plotPoints || [];
+    AppData.goals = parsed.goals || AppData.goals;
+    AppData.sessions = parsed.sessions || [];
     AppData.settings = parsed.settings || AppData.settings;
   }
 
@@ -41,7 +50,10 @@ function saveDataToStorage() {
   const dataToSave = {
     chapters: AppData.chapters,
     characters: AppData.characters,
+    locations: AppData.locations,
     plotPoints: AppData.plotPoints,
+    goals: AppData.goals,
+    sessions: AppData.sessions,
     settings: AppData.settings,
     currentChapterId: AppData.currentChapterId,
   };
@@ -62,7 +74,11 @@ function loadLastChapter() {
 function initializeUI() {
   renderChaptersList();
   renderCharactersGrid();
+  renderLocationsGrid();
   renderPlotTimeline();
+  renderGoals();
+  renderSessions();
+  renderSearch();
 }
 
 function initializeEventListeners() {
@@ -123,6 +139,49 @@ function initializeEventListeners() {
   document
     .getElementById("save-plot-modal")
     .addEventListener("click", savePlotFromModal);
+
+  // Locations
+  document
+    .getElementById("add-location-btn")
+    .addEventListener("click", () => openLocationModal());
+  document
+    .getElementById("close-location-modal")
+    .addEventListener("click", closeLocationModal);
+  document
+    .getElementById("cancel-location")
+    .addEventListener("click", closeLocationModal);
+  document
+    .getElementById("save-location-modal")
+    .addEventListener("click", saveLocationFromModal);
+
+  // Goals
+  document
+    .getElementById("set-goal-btn")
+    .addEventListener("click", () => openGoalModal());
+  document.getElementById("close-goal-modal").addEventListener("click", closeGoalModal);
+  document.getElementById("cancel-goal").addEventListener("click", closeGoalModal);
+  document.getElementById("save-goal-modal").addEventListener("click", saveGoalFromModal);
+
+  // Sessions
+  document
+    .getElementById("start-session-btn")
+    .addEventListener("click", startSession);
+  document.getElementById("end-session-btn").addEventListener("click", endSession);
+
+  // Search
+  document
+    .getElementById("search-input")
+    .addEventListener("input", handleSearch);
+  document
+    .getElementById("search-chapters")
+    .addEventListener("change", handleSearch);
+  document
+    .getElementById("search-characters")
+    .addEventListener("change", handleSearch);
+  document
+    .getElementById("search-locations")
+    .addEventListener("change", handleSearch);
+  document.getElementById("search-plot").addEventListener("change", handleSearch);
 
   // Settings
   document
