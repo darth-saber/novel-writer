@@ -1,620 +1,892 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novel Writer Studio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <div class="app-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <i class="fas fa-feather-alt"></i>
-                <h1>Novel Writer</h1>
-            </div>
-            
-            <nav class="nav-menu">
-                <button class="nav-item active" data-tab="editor">
-                    <i class="fas fa-pen-fancy"></i>
-                    <span>Editor</span>
-                </button>
-                <button class="nav-item" data-tab="chapters">
-                    <i class="fas fa-book"></i>
-                    <span>Chapters</span>
-                </button>
-                <button class="nav-item" data-tab="characters">
-                    <i class="fas fa-users"></i>
-                    <span>Characters</span>
-                </button>
-                <button class="nav-item" data-tab="locations">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Locations</span>
-                </button>
-                <button class="nav-item" data-tab="plot">
-                    <i class="fas fa-sitemap"></i>
-                    <span>Plot Outline</span>
-                </button>
-                <button class="nav-item" data-tab="assistant">
-                    <i class="fas fa-robot"></i>
-                    <span>Writing Assistant</span>
-                </button>
-                <button class="nav-item" data-tab="goals">
-                    <i class="fas fa-bullseye"></i>
-                    <span>Goals</span>
-                </button>
-                <button class="nav-item" data-tab="sessions">
-                    <i class="fas fa-clock"></i>
-                    <span>Sessions</span>
-                </button>
-                <button class="nav-item" data-tab="search">
-                    <i class="fas fa-search"></i>
-                    <span>Search</span>
-                </button>
-                <button class="nav-item" data-tab="settings">
-                    <i class="fas fa-cog"></i>
-                    <span>Settings</span>
-                </button>
-            </nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Novel Writer Studio</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="app-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="logo">
+                    <i class="fas fa-feather-alt"></i>
+                    <h1>Novel Writer</h1>
+                </div>
 
-            <div class="sidebar-stats">
-                <div class="stat">
-                    <span class="stat-label">Words</span>
-                    <span class="stat-value" id="total-words">0</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">Chapters</span>
-                    <span class="stat-value" id="total-chapters">0</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">Characters</span>
-                    <span class="stat-value" id="total-characters">0</span>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Editor Tab -->
-            <section class="tab-content active" id="editor-tab">
-                <div class="editor-header">
-                    <input type="text" id="chapter-title" placeholder="Chapter Title" class="chapter-title-input">
-                    <div class="editor-actions">
-                        <button class="btn btn-secondary" id="save-chapter">
-                            <i class="fas fa-save"></i> Save
-                        </button>
-                        <button class="btn btn-primary" id="new-chapter">
-                            <i class="fas fa-plus"></i> New Chapter
-                        </button>
-                    </div>
-                </div>
-                <div class="editor-container">
-                    <textarea id="editor" placeholder="Start writing your story here..."></textarea>
-                </div>
-                <div class="editor-footer">
-                    <span id="word-count">0 words</span>
-                    <span id="char-count">0 characters</span>
-                    <span id="reading-time">0 min read</span>
-                </div>
-            </section>
-
-            <!-- Chapters Tab -->
-            <section class="tab-content" id="chapters-tab">
-                <div class="section-header">
-                    <h2>Chapter Management</h2>
-                    <button class="btn btn-primary" id="add-chapter-btn">
-                        <i class="fas fa-plus"></i> Add Chapter
+                <nav class="nav-menu">
+                    <button class="nav-item active" data-tab="editor">
+                        <i class="fas fa-pen-fancy"></i>
+                        <span>Editor</span>
                     </button>
-                </div>
-                <div class="chapters-list" id="chapters-list">
-                    <!-- Chapters will be rendered here -->
-                </div>
-            </section>
-
-            <!-- Characters Tab -->
-            <section class="tab-content" id="characters-tab">
-                <div class="section-header">
-                    <h2>Character Profiles</h2>
-                    <button class="btn btn-primary" id="add-character-btn">
-                        <i class="fas fa-plus"></i> Add Character
+                    <button class="nav-item" data-tab="chapters">
+                        <i class="fas fa-book"></i>
+                        <span>Chapters</span>
                     </button>
-                </div>
-                <div class="characters-grid" id="characters-grid">
-                    <!-- Characters will be rendered here -->
-                </div>
-            </section>
-
-            <!-- Locations Tab -->
-            <section class="tab-content" id="locations-tab">
-                <div class="section-header">
-                    <h2>World Building & Locations</h2>
-                    <button class="btn btn-primary" id="add-location-btn">
-                        <i class="fas fa-plus"></i> Add Location
+                    <button class="nav-item" data-tab="characters">
+                        <i class="fas fa-users"></i>
+                        <span>Characters</span>
                     </button>
-                </div>
-                <div class="locations-grid" id="locations-grid">
-                    <!-- Locations will be rendered here -->
-                </div>
-            </section>
-
-            <!-- Plot Tab -->
-            <section class="tab-content" id="plot-tab">
-                <div class="section-header">
-                    <h2>Plot Outline</h2>
-                    <button class="btn btn-primary" id="add-plot-point-btn">
-                        <i class="fas fa-plus"></i> Add Plot Point
+                    <button class="nav-item" data-tab="locations">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Locations</span>
                     </button>
-                </div>
-                <div class="plot-container">
-                    <div class="plot-timeline" id="plot-timeline">
-                        <!-- Plot points will be rendered here -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- Writing Assistant Tab -->
-            <section class="tab-content" id="assistant-tab">
-                <div class="section-header">
-                    <h2>AI Writing Assistant</h2>
-                </div>
-                <div class="assistant-container">
-                    <div class="assistant-prompt-section">
-                        <h3>Writing Suggestions</h3>
-                        <div class="form-group">
-                            <label for="prompt-type">What would you like help with?</label>
-                            <select id="prompt-type">
-                                <option value="continue">Continue the story from where you left off</option>
-                                <option value="dialogue">Write a dialogue between characters</option>
-                                <option value="description">Create a vivid description</option>
-                                <option value="plot-hole">Help fill a plot hole</option>
-                                <option value="rewrite">Rewrite/improve selected text</option>
-                                <option value="brainstorm">Brainstorm ideas for this scene</option>
-                                <option value="outline">Generate a chapter outline</option>
-                                <option value="conflict">Add more conflict/tension</option>
-                                <option value="ending">Write an ending for this scene</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="writing-prompt">Describe what you want (optional)</label>
-                            <textarea id="writing-prompt" placeholder="E.g., 'Write a dramatic confrontation between the protagonist and villain in a dark castle...'"></textarea>
-                        </div>
-                        <button class="btn btn-primary" id="generate-content">
-                            <i class="fas fa-magic"></i> Generate Content
-                        </button>
-                    </div>
-                    
-                    <div class="ai-suggestions" id="ai-suggestions">
-                        <h3>Suggestions</h3>
-                        <div class="suggestion-content" id="suggestion-content">
-                            <div class="empty-state">
-                                <i class="fas fa-robot"></i>
-                                <h3>AI Writing Assistant Ready</h3>
-                                <p>Select an option above and click Generate to get writing suggestions</p>
-                            </div>
-                        </div>
-                        <div class="suggestion-actions" id="suggestion-actions" style="display: none;">
-                            <button class="btn btn-secondary" id="copy-suggestion">
-                                <i class="fas fa-copy"></i> Copy
-                            </button>
-                            <button class="btn btn-primary" id="insert-suggestion">
-                                <i class="fas fa-plus"></i> Insert at Cursor
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="writing-tips">
-                        <h3>Writing Tips</h3>
-                        <div class="tips-carousel" id="tips-carousel">
-                            <div class="tip-card">
-                                <i class="fas fa-lightbulb"></i>
-                                <p>"Show, don't tell" - Use sensory details and actions instead of simply stating emotions.</p>
-                            </div>
-                            <div class="tip-card">
-                                <i class="fas fa-lightbulb"></i>
-                                <p>Strong dialogue reveals character. Each character should have a unique voice.</p>
-                            </div>
-                            <div class="tip-card">
-                                <i class="fas fa-lightbulb"></i>
-                                <p>Conflict is the engine of story. Every scene should have tension or move the plot forward.</p>
-                            </div>
-                            <div class="tip-card">
-                                <i class="fas fa-lightbulb"></i>
-                                <p>Write with all five senses. Don't just describe what characters see.</p>
-                            </div>
-                            <div class="tip-card">
-                                <i class="fas fa-lightbulb"></i>
-                                <p>Kill your darlings. Be willing to cut even beautiful sentences that don't serve the story.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Goals Tab -->
-            <section class="tab-content" id="goals-tab">
-                <div class="section-header">
-                    <h2>Writing Goals</h2>
-                    <button class="btn btn-primary" id="set-goal-btn">
-                        <i class="fas fa-plus"></i> Set Goal
+                    <button class="nav-item" data-tab="plot">
+                        <i class="fas fa-sitemap"></i>
+                        <span>Plot Outline</span>
                     </button>
-                </div>
-                <div class="goals-container">
-                    <div class="goal-overview">
-                        <div class="goal-card main-goal">
-                            <h3>Daily Word Goal</h3>
-                            <div class="goal-progress-container">
-                                <div class="goal-progress-bar" id="daily-progress">
-                                    <div class="goal-progress-fill" id="daily-progress-fill"></div>
-                                </div>
-                                <div class="goal-stats">
-                                    <span id="daily-current">0</span> / <span id="daily-target">1000</span> words
-                                </div>
-                            </div>
-                            <div class="goal-streak">
-                                <i class="fas fa-fire"></i>
-                                <span id="writing-streak">0</span> day streak!
-                            </div>
-                        </div>
-                        
-                        <div class="goal-card weekly-goal">
-                            <h3>Weekly Progress</h3>
-                            <div class="week-progress" id="week-progress">
-                                <div class="day-dot" data-day="Mon"><span>Mon</span></div>
-                                <div class="day-dot" data-day="Tue"><span>Tue</span></div>
-                                <div class="day-dot" data-day="Wed"><span>Wed</span></div>
-                                <div class="day-dot" data-day="Thu"><span>Thu</span></div>
-                                <div class="day-dot" data-day="Fri"><span>Fri</span></div>
-                                <div class="day-dot" data-day="Sat"><span>Sat</span></div>
-                                <div class="day-dot" data-day="Sun"><span>Sun</span></div>
-                            </div>
-                            <div class="weekly-stats">
-                                This week: <span id="weekly-total">0</span> words
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="goal-history">
-                        <h3>Recent Achievements</h3>
-                        <div class="achievements-list" id="achievements-list">
-                            <!-- Achievements will be rendered here -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Writing Sessions Tab -->
-            <section class="tab-content" id="sessions-tab">
-                <div class="section-header">
-                    <h2>Writing Sessions</h2>
-                    <button class="btn btn-primary" id="start-session-btn">
-                        <i class="fas fa-play"></i> Start Session
+                    <button class="nav-item" data-tab="assistant">
+                        <i class="fas fa-robot"></i>
+                        <span>Writing Assistant</span>
                     </button>
-                </div>
-                <div class="sessions-container">
-                    <div class="current-session" id="current-session" style="display: none;">
-                        <div class="session-timer">
-                            <div class="timer-display" id="timer-display">00:00:00</div>
-                            <div class="session-stats">
-                                <span>Words: <span id="session-words">0</span></span>
-                                <span>WPM: <span id="session-wpm">0</span></span>
-                            </div>
-                        </div>
-                        <div class="session-actions">
-                            <button class="btn btn-danger" id="end-session-btn">
-                                <i class="fas fa-stop"></i> End Session
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="session-summary" id="session-summary">
-                        <h3>Today's Session</h3>
-                        <div class="session-cards">
-                            <div class="session-stat-card">
-                                <i class="fas fa-clock"></i>
-                                <div class="stat-info">
-                                    <span class="stat-value" id="today-time">0h 0m</span>
-                                    <span class="stat-label">Time Written</span>
-                                </div>
-                            </div>
-                            <div class="session-stat-card">
-                                <i class="fas fa-pen"></i>
-                                <div class="stat-info">
-                                    <span class="stat-value" id="today-words">0</span>
-                                    <span class="stat-label">Words Today</span>
-                                </div>
-                            </div>
-                            <div class="session-stat-card">
-                                <i class="fas fa-tachometer-alt"></i>
-                                <div class="stat-info">
-                                    <span class="stat-value" id="today-wpm">0</span>
-                                    <span class="stat-label">Avg WPM</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="session-history">
-                        <h3>Recent Sessions</h3>
-                        <div class="sessions-list" id="sessions-list">
-                            <!-- Sessions will be rendered here -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Search Tab -->
-            <section class="tab-content" id="search-tab">
-                <div class="section-header">
-                    <h2>Search Your Novel</h2>
-                </div>
-                <div class="search-container">
-                    <div class="search-box">
+                    <button class="nav-item" data-tab="goals">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Goals</span>
+                    </button>
+                    <button class="nav-item" data-tab="sessions">
+                        <i class="fas fa-clock"></i>
+                        <span>Sessions</span>
+                    </button>
+                    <button class="nav-item" data-tab="search">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="search-input" placeholder="Search chapters, characters, plot points...">
+                        <span>Search</span>
+                    </button>
+                    <button class="nav-item" data-tab="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </button>
+                </nav>
+
+                <div class="sidebar-stats">
+                    <div class="stat">
+                        <span class="stat-label">Words</span>
+                        <span class="stat-value" id="total-words">0</span>
                     </div>
-                    <div class="search-filters">
-                        <label class="filter-checkbox">
-                            <input type="checkbox" id="search-chapters" checked> Chapters
-                        </label>
-                        <label class="filter-checkbox">
-                            <input type="checkbox" id="search-characters" checked> Characters
-                        </label>
-                        <label class="filter-checkbox">
-                            <input type="checkbox" id="search-locations" checked> Locations
-                        </label>
-                        <label class="filter-checkbox">
-                            <input type="checkbox" id="search-plot" checked> Plot Points
-                        </label>
+                    <div class="stat">
+                        <span class="stat-label">Chapters</span>
+                        <span class="stat-value" id="total-chapters">0</span>
                     </div>
-                    <div class="search-results" id="search-results">
-                        <div class="empty-state">
+                    <div class="stat">
+                        <span class="stat-label">Characters</span>
+                        <span class="stat-value" id="total-characters">0</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Editor Tab -->
+                <section class="tab-content active" id="editor-tab">
+                    <div class="editor-header">
+                        <input
+                            type="text"
+                            id="chapter-title"
+                            placeholder="Chapter Title"
+                            class="chapter-title-input"
+                        />
+                        <div class="editor-actions">
+                            <button class="btn btn-secondary" id="save-chapter">
+                                <i class="fas fa-save"></i> Save
+                            </button>
+                            <button class="btn btn-primary" id="new-chapter">
+                                <i class="fas fa-plus"></i> New Chapter
+                            </button>
+                        </div>
+                    </div>
+                    <div class="editor-container">
+                        <textarea
+                            id="editor"
+                            placeholder="Start writing your story here..."
+                        ></textarea>
+                    </div>
+                    <div class="editor-footer">
+                        <span id="word-count">0 words</span>
+                        <span id="char-count">0 characters</span>
+                        <span id="reading-time">0 min read</span>
+                    </div>
+                </section>
+
+                <!-- Chapters Tab -->
+                <section class="tab-content" id="chapters-tab">
+                    <div class="section-header">
+                        <h2>Chapter Management</h2>
+                        <button class="btn btn-primary" id="add-chapter-btn">
+                            <i class="fas fa-plus"></i> Add Chapter
+                        </button>
+                    </div>
+                    <div class="chapters-list" id="chapters-list">
+                        <!-- Chapters will be rendered here -->
+                    </div>
+                </section>
+
+                <!-- Characters Tab -->
+                <section class="tab-content" id="characters-tab">
+                    <div class="section-header">
+                        <h2>Character Profiles</h2>
+                        <button class="btn btn-primary" id="add-character-btn">
+                            <i class="fas fa-plus"></i> Add Character
+                        </button>
+                    </div>
+                    <div class="characters-grid" id="characters-grid">
+                        <!-- Characters will be rendered here -->
+                    </div>
+                </section>
+
+                <!-- Locations Tab -->
+                <section class="tab-content" id="locations-tab">
+                    <div class="section-header">
+                        <h2>World Building & Locations</h2>
+                        <button class="btn btn-primary" id="add-location-btn">
+                            <i class="fas fa-plus"></i> Add Location
+                        </button>
+                    </div>
+                    <div class="locations-grid" id="locations-grid">
+                        <!-- Locations will be rendered here -->
+                    </div>
+                </section>
+
+                <!-- Plot Tab -->
+                <section class="tab-content" id="plot-tab">
+                    <div class="section-header">
+                        <h2>Plot Outline</h2>
+                        <button class="btn btn-primary" id="add-plot-point-btn">
+                            <i class="fas fa-plus"></i> Add Plot Point
+                        </button>
+                    </div>
+                    <div class="plot-container">
+                        <div class="plot-timeline" id="plot-timeline">
+                            <!-- Plot points will be rendered here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Writing Assistant Tab -->
+                <section class="tab-content" id="assistant-tab">
+                    <div class="section-header">
+                        <h2>AI Writing Assistant</h2>
+                    </div>
+                    <div class="assistant-container">
+                        <div class="assistant-prompt-section">
+                            <h3>Writing Suggestions</h3>
+                            <div class="form-group">
+                                <label for="prompt-type"
+                                    >What would you like help with?</label
+                                >
+                                <select id="prompt-type">
+                                    <option value="continue">
+                                        Continue the story from where you left
+                                        off
+                                    </option>
+                                    <option value="dialogue">
+                                        Write a dialogue between characters
+                                    </option>
+                                    <option value="description">
+                                        Create a vivid description
+                                    </option>
+                                    <option value="plot-hole">
+                                        Help fill a plot hole
+                                    </option>
+                                    <option value="rewrite">
+                                        Rewrite/improve selected text
+                                    </option>
+                                    <option value="brainstorm">
+                                        Brainstorm ideas for this scene
+                                    </option>
+                                    <option value="outline">
+                                        Generate a chapter outline
+                                    </option>
+                                    <option value="conflict">
+                                        Add more conflict/tension
+                                    </option>
+                                    <option value="ending">
+                                        Write an ending for this scene
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="writing-prompt"
+                                    >Describe what you want (optional)</label
+                                >
+                                <textarea
+                                    id="writing-prompt"
+                                    placeholder="E.g., 'Write a dramatic confrontation between the protagonist and villain in a dark castle...'"
+                                ></textarea>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                id="generate-content"
+                            >
+                                <i class="fas fa-magic"></i> Generate Content
+                            </button>
+                        </div>
+
+                        <div class="ai-suggestions" id="ai-suggestions">
+                            <h3>Suggestions</h3>
+                            <div
+                                class="suggestion-content"
+                                id="suggestion-content"
+                            >
+                                <div class="empty-state">
+                                    <i class="fas fa-robot"></i>
+                                    <h3>AI Writing Assistant Ready</h3>
+                                    <p>
+                                        Select an option above and click
+                                        Generate to get writing suggestions
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="suggestion-actions"
+                                id="suggestion-actions"
+                                style="display: none"
+                            >
+                                <button
+                                    class="btn btn-secondary"
+                                    id="copy-suggestion"
+                                >
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                                <button
+                                    class="btn btn-primary"
+                                    id="insert-suggestion"
+                                >
+                                    <i class="fas fa-plus"></i> Insert at Cursor
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="writing-tips">
+                            <h3>Writing Tips</h3>
+                            <div class="tips-carousel" id="tips-carousel">
+                                <div class="tip-card">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p>
+                                        "Show, don't tell" - Use sensory details
+                                        and actions instead of simply stating
+                                        emotions.
+                                    </p>
+                                </div>
+                                <div class="tip-card">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p>
+                                        Strong dialogue reveals character. Each
+                                        character should have a unique voice.
+                                    </p>
+                                </div>
+                                <div class="tip-card">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p>
+                                        Conflict is the engine of story. Every
+                                        scene should have tension or move the
+                                        plot forward.
+                                    </p>
+                                </div>
+                                <div class="tip-card">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p>
+                                        Write with all five senses. Don't just
+                                        describe what characters see.
+                                    </p>
+                                </div>
+                                <div class="tip-card">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p>
+                                        Kill your darlings. Be willing to cut
+                                        even beautiful sentences that don't
+                                        serve the story.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Goals Tab -->
+                <section class="tab-content" id="goals-tab">
+                    <div class="section-header">
+                        <h2>Writing Goals</h2>
+                        <button class="btn btn-primary" id="set-goal-btn">
+                            <i class="fas fa-plus"></i> Set Goal
+                        </button>
+                    </div>
+                    <div class="goals-container">
+                        <div class="goal-overview">
+                            <div class="goal-card main-goal">
+                                <h3>Daily Word Goal</h3>
+                                <div class="goal-progress-container">
+                                    <div
+                                        class="goal-progress-bar"
+                                        id="daily-progress"
+                                    >
+                                        <div
+                                            class="goal-progress-fill"
+                                            id="daily-progress-fill"
+                                        ></div>
+                                    </div>
+                                    <div class="goal-stats">
+                                        <span id="daily-current">0</span> /
+                                        <span id="daily-target">1000</span>
+                                        words
+                                    </div>
+                                </div>
+                                <div class="goal-streak">
+                                    <i class="fas fa-fire"></i>
+                                    <span id="writing-streak">0</span> day
+                                    streak!
+                                </div>
+                            </div>
+
+                            <div class="goal-card weekly-goal">
+                                <h3>Weekly Progress</h3>
+                                <div class="week-progress" id="week-progress">
+                                    <div class="day-dot" data-day="Mon">
+                                        <span>Mon</span>
+                                    </div>
+                                    <div class="day-dot" data-day="Tue">
+                                        <span>Tue</span>
+                                    </div>
+                                    <div class="day-dot" data-day="Wed">
+                                        <span>Wed</span>
+                                    </div>
+                                    <div class="day-dot" data-day="Thu">
+                                        <span>Thu</span>
+                                    </div>
+                                    <div class="day-dot" data-day="Fri">
+                                        <span>Fri</span>
+                                    </div>
+                                    <div class="day-dot" data-day="Sat">
+                                        <span>Sat</span>
+                                    </div>
+                                    <div class="day-dot" data-day="Sun">
+                                        <span>Sun</span>
+                                    </div>
+                                </div>
+                                <div class="weekly-stats">
+                                    This week:
+                                    <span id="weekly-total">0</span> words
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="goal-history">
+                            <h3>Recent Achievements</h3>
+                            <div
+                                class="achievements-list"
+                                id="achievements-list"
+                            >
+                                <!-- Achievements will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Writing Sessions Tab -->
+                <section class="tab-content" id="sessions-tab">
+                    <div class="section-header">
+                        <h2>Writing Sessions</h2>
+                        <button class="btn btn-primary" id="start-session-btn">
+                            <i class="fas fa-play"></i> Start Session
+                        </button>
+                    </div>
+                    <div class="sessions-container">
+                        <div
+                            class="current-session"
+                            id="current-session"
+                            style="display: none"
+                        >
+                            <div class="session-timer">
+                                <div class="timer-display" id="timer-display">
+                                    00:00:00
+                                </div>
+                                <div class="session-stats">
+                                    <span
+                                        >Words:
+                                        <span id="session-words">0</span></span
+                                    >
+                                    <span
+                                        >WPM:
+                                        <span id="session-wpm">0</span></span
+                                    >
+                                </div>
+                            </div>
+                            <div class="session-actions">
+                                <button
+                                    class="btn btn-danger"
+                                    id="end-session-btn"
+                                >
+                                    <i class="fas fa-stop"></i> End Session
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="session-summary" id="session-summary">
+                            <h3>Today's Session</h3>
+                            <div class="session-cards">
+                                <div class="session-stat-card">
+                                    <i class="fas fa-clock"></i>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="today-time"
+                                            >0h 0m</span
+                                        >
+                                        <span class="stat-label"
+                                            >Time Written</span
+                                        >
+                                    </div>
+                                </div>
+                                <div class="session-stat-card">
+                                    <i class="fas fa-pen"></i>
+                                    <div class="stat-info">
+                                        <span
+                                            class="stat-value"
+                                            id="today-words"
+                                            >0</span
+                                        >
+                                        <span class="stat-label"
+                                            >Words Today</span
+                                        >
+                                    </div>
+                                </div>
+                                <div class="session-stat-card">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="today-wpm"
+                                            >0</span
+                                        >
+                                        <span class="stat-label">Avg WPM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="session-history">
+                            <h3>Recent Sessions</h3>
+                            <div class="sessions-list" id="sessions-list">
+                                <!-- Sessions will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Search Tab -->
+                <section class="tab-content" id="search-tab">
+                    <div class="section-header">
+                        <h2>Search Your Novel</h2>
+                    </div>
+                    <div class="search-container">
+                        <div class="search-box">
                             <i class="fas fa-search"></i>
-                            <h3>Search Your Novel</h3>
-                            <p>Enter a search term to find content across all your chapters, characters, and more</p>
+                            <input
+                                type="text"
+                                id="search-input"
+                                placeholder="Search chapters, characters, plot points..."
+                            />
+                        </div>
+                        <div class="search-filters">
+                            <label class="filter-checkbox">
+                                <input
+                                    type="checkbox"
+                                    id="search-chapters"
+                                    checked
+                                />
+                                Chapters
+                            </label>
+                            <label class="filter-checkbox">
+                                <input
+                                    type="checkbox"
+                                    id="search-characters"
+                                    checked
+                                />
+                                Characters
+                            </label>
+                            <label class="filter-checkbox">
+                                <input
+                                    type="checkbox"
+                                    id="search-locations"
+                                    checked
+                                />
+                                Locations
+                            </label>
+                            <label class="filter-checkbox">
+                                <input
+                                    type="checkbox"
+                                    id="search-plot"
+                                    checked
+                                />
+                                Plot Points
+                            </label>
+                        </div>
+                        <div class="search-results" id="search-results">
+                            <div class="empty-state">
+                                <i class="fas fa-search"></i>
+                                <h3>Search Your Novel</h3>
+                                <p>
+                                    Enter a search term to find content across
+                                    all your chapters, characters, and more
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Settings Tab -->
-            <section class="tab-content" id="settings-tab">
-                <div class="section-header">
-                    <h2>Settings</h2>
-                </div>
-                <div class="settings-container">
-                    <div class="setting-group">
-                        <h3>Editor Settings</h3>
-                        <div class="setting-item">
-                            <label for="font-size">Font Size</label>
-                            <select id="font-size">
-                                <option value="14">14px</option>
-                                <option value="16" selected>16px</option>
-                                <option value="18">18px</option>
-                                <option value="20">20px</option>
-                            </select>
+                <!-- Settings Tab -->
+                <section class="tab-content" id="settings-tab">
+                    <div class="section-header">
+                        <h2>Settings</h2>
+                    </div>
+                    <div class="settings-container">
+                        <div class="setting-group">
+                            <h3>Editor Settings</h3>
+                            <div class="setting-item">
+                                <label for="font-size">Font Size</label>
+                                <select id="font-size">
+                                    <option value="14">14px</option>
+                                    <option value="16" selected>16px</option>
+                                    <option value="18">18px</option>
+                                    <option value="20">20px</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label for="font-family">Font Family</label>
+                                <select id="font-family">
+                                    <option value="'Georgia', serif">
+                                        Georgia
+                                    </option>
+                                    <option value="'Times New Roman', serif">
+                                        Times New Roman
+                                    </option>
+                                    <option value="'Arial', sans-serif">
+                                        Arial
+                                    </option>
+                                    <option value="'Courier New', monospace">
+                                        Courier New
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label for="line-height">Line Height</label>
+                                <select id="line-height">
+                                    <option value="1.5">1.5</option>
+                                    <option value="1.8" selected>1.8</option>
+                                    <option value="2.0">2.0</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="setting-item">
-                            <label for="font-family">Font Family</label>
-                            <select id="font-family">
-                                <option value="'Georgia', serif">Georgia</option>
-                                <option value="'Times New Roman', serif">Times New Roman</option>
-                                <option value="'Arial', sans-serif">Arial</option>
-                                <option value="'Courier New', monospace">Courier New</option>
-                            </select>
-                        </div>
-                        <div class="setting-item">
-                            <label for="line-height">Line Height</label>
-                            <select id="line-height">
-                                <option value="1.5">1.5</option>
-                                <option value="1.8" selected>1.8</option>
-                                <option value="2.0">2.0</option>
-                            </select>
+                        <div class="setting-group">
+                            <h3>Data Management</h3>
+                            <div class="setting-item">
+                                <button
+                                    class="btn btn-secondary"
+                                    id="export-data"
+                                >
+                                    <i class="fas fa-download"></i> Export All
+                                    Data
+                                </button>
+                            </div>
+                            <div class="setting-item">
+                                <button
+                                    class="btn btn-secondary"
+                                    id="import-data"
+                                >
+                                    <i class="fas fa-upload"></i> Import Data
+                                </button>
+                                <input
+                                    type="file"
+                                    id="import-file"
+                                    accept=".json"
+                                    style="display: none"
+                                />
+                            </div>
+                            <div class="setting-item">
+                                <button class="btn btn-danger" id="clear-data">
+                                    <i class="fas fa-trash"></i> Clear All Data
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="setting-group">
-                        <h3>Data Management</h3>
-                        <div class="setting-item">
-                            <button class="btn btn-secondary" id="export-data">
-                                <i class="fas fa-download"></i> Export All Data
-                            </button>
-                        </div>
-                        <div class="setting-item">
-                            <button class="btn btn-secondary" id="import-data">
-                                <i class="fas fa-upload"></i> Import Data
-                            </button>
-                            <input type="file" id="import-file" accept=".json" style="display: none;">
-                        </div>
-                        <div class="setting-item">
-                            <button class="btn btn-danger" id="clear-data">
-                                <i class="fas fa-trash"></i> Clear All Data
-                            </button>
-                        </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Modal for Adding/Editing Chapter -->
+        <div class="modal" id="chapter-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="chapter-modal-title">Add New Chapter</h3>
+                    <button class="modal-close" id="close-chapter-modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="chapter-number-input">Chapter Number</label>
+                        <input
+                            type="number"
+                            id="chapter-number-input"
+                            min="1"
+                            value="1"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="chapter-title-input">Chapter Title</label>
+                        <input
+                            type="text"
+                            id="chapter-title-input"
+                            placeholder="Enter chapter title"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="chapter-content-input"
+                            >Chapter Content</label
+                        >
+                        <textarea
+                            id="chapter-content-input"
+                            placeholder="Write your chapter content..."
+                        ></textarea>
                     </div>
                 </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- Modal for Adding/Editing Chapter -->
-    <div class="modal" id="chapter-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="chapter-modal-title">Add New Chapter</h3>
-                <button class="modal-close" id="close-chapter-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="chapter-number-input">Chapter Number</label>
-                    <input type="number" id="chapter-number-input" min="1" value="1">
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancel-chapter">
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary" id="save-chapter-modal">
+                        Save Chapter
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="chapter-title-input">Chapter Title</label>
-                    <input type="text" id="chapter-title-input" placeholder="Enter chapter title">
-                </div>
-                <div class="form-group">
-                    <label for="chapter-content-input">Chapter Content</label>
-                    <textarea id="chapter-content-input" placeholder="Write your chapter content..."></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-chapter">Cancel</button>
-                <button class="btn btn-primary" id="save-chapter-modal">Save Chapter</button>
             </div>
         </div>
-    </div>
 
-    <!-- Modal for Adding/Editing Character -->
-    <div class="modal" id="character-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="character-modal-title">Add New Character</h3>
-                <button class="modal-close" id="close-character-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="character-name">Character Name</label>
-                    <input type="text" id="character-name" placeholder="Enter character name">
+        <!-- Modal for Adding/Editing Character -->
+        <div class="modal" id="character-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="character-modal-title">Add New Character</h3>
+                    <button class="modal-close" id="close-character-modal">
+                        &times;
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="character-role">Role</label>
-                    <select id="character-role">
-                        <option value="protagonist">Protagonist</option>
-                        <option value="antagonist">Antagonist</option>
-                        <option value="supporting">Supporting</option>
-                        <option value="minor">Minor</option>
-                    </select>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="character-name">Character Name</label>
+                        <input
+                            type="text"
+                            id="character-name"
+                            placeholder="Enter character name"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="character-role">Role</label>
+                        <select id="character-role">
+                            <option value="protagonist">Protagonist</option>
+                            <option value="antagonist">Antagonist</option>
+                            <option value="supporting">Supporting</option>
+                            <option value="minor">Minor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="character-bio">Biography</label>
+                        <textarea
+                            id="character-bio"
+                            placeholder="Write character biography..."
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="character-traits">Personality Traits</label>
+                        <textarea
+                            id="character-traits"
+                            placeholder="List personality traits..."
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="character-notes">Additional Notes</label>
+                        <textarea
+                            id="character-notes"
+                            placeholder="Any additional notes..."
+                        ></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="character-bio">Biography</label>
-                    <textarea id="character-bio" placeholder="Write character biography..."></textarea>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancel-character">
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary" id="save-character-modal">
+                        Save Character
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="character-traits">Personality Traits</label>
-                    <textarea id="character-traits" placeholder="List personality traits..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="character-notes">Additional Notes</label>
-                    <textarea id="character-notes" placeholder="Any additional notes..."></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-character">Cancel</button>
-                <button class="btn btn-primary" id="save-character-modal">Save Character</button>
             </div>
         </div>
-    </div>
 
-    <!-- Modal for Adding/Editing Plot Point -->
-    <div class="modal" id="plot-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="plot-modal-title">Add New Plot Point</h3>
-                <button class="modal-close" id="close-plot-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="plot-title">Plot Point Title</label>
-                    <input type="text" id="plot-title" placeholder="Enter plot point title">
+        <!-- Modal for Adding/Editing Plot Point -->
+        <div class="modal" id="plot-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="plot-modal-title">Add New Plot Point</h3>
+                    <button class="modal-close" id="close-plot-modal">
+                        &times;
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="plot-type">Type</label>
-                    <select id="plot-type">
-                        <option value="exposition">Exposition</option>
-                        <option value="rising-action">Rising Action</option>
-                        <option value="climax">Climax</option>
-                        <option value="falling-action">Falling Action</option>
-                        <option value="resolution">Resolution</option>
-                    </select>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="plot-title">Plot Point Title</label>
+                        <input
+                            type="text"
+                            id="plot-title"
+                            placeholder="Enter plot point title"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="plot-type">Type</label>
+                        <select id="plot-type">
+                            <option value="exposition">Exposition</option>
+                            <option value="rising-action">Rising Action</option>
+                            <option value="climax">Climax</option>
+                            <option value="falling-action">
+                                Falling Action
+                            </option>
+                            <option value="resolution">Resolution</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="plot-chapter">Associated Chapter</label>
+                        <input
+                            type="text"
+                            id="plot-chapter"
+                            placeholder="Enter chapter number (optional)"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="plot-description">Description</label>
+                        <textarea
+                            id="plot-description"
+                            placeholder="Describe this plot point..."
+                        ></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="plot-chapter">Associated Chapter</label>
-                    <input type="text" id="plot-chapter" placeholder="Enter chapter number (optional)">
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancel-plot">
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary" id="save-plot-modal">
+                        Save Plot Point
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="plot-description">Description</label>
-                    <textarea id="plot-description" placeholder="Describe this plot point..."></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-plot">Cancel</button>
-                <button class="btn btn-primary" id="save-plot-modal">Save Plot Point</button>
             </div>
         </div>
-    </div>
 
-    <!-- Modal for Adding/Editing Location -->
-    <div class="modal" id="location-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="location-modal-title">Add New Location</h3>
-                <button class="modal-close" id="close-location-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="location-name">Location Name</label>
-                    <input type="text" id="location-name" placeholder="Enter location name">
+        <!-- Modal for Adding/Editing Location -->
+        <div class="modal" id="location-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="location-modal-title">Add New Location</h3>
+                    <button class="modal-close" id="close-location-modal">
+                        &times;
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="location-type">Type</label>
-                    <select id="location-type">
-                        <option value="city">City/Town</option>
-                        <option value="wilderness">Wilderness/Nature</option>
-                        <option value="building">Building/Indoor</option>
-                        <option value="realm">Realm/World</option>
-                        <option value="other">Other</option>
-                    </select>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="location-name">Location Name</label>
+                        <input
+                            type="text"
+                            id="location-name"
+                            placeholder="Enter location name"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="location-type">Type</label>
+                        <select id="location-type">
+                            <option value="city">City/Town</option>
+                            <option value="wilderness">
+                                Wilderness/Nature
+                            </option>
+                            <option value="building">Building/Indoor</option>
+                            <option value="realm">Realm/World</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="location-description">Description</label>
+                        <textarea
+                            id="location-description"
+                            placeholder="Describe this location..."
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location-history">History/Backstory</label>
+                        <textarea
+                            id="location-history"
+                            placeholder="Any historical details about this place..."
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location-notes">Additional Notes</label>
+                        <textarea
+                            id="location-notes"
+                            placeholder="Any additional notes..."
+                        ></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="location-description">Description</label>
-                    <textarea id="location-description" placeholder="Describe this location..."></textarea>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancel-location">
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary" id="save-location-modal">
+                        Save Location
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="location-history">History/Backstory</label>
-                    <textarea id="location-history" placeholder="Any historical details about this place..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="location-notes">Additional Notes</label>
-                    <textarea id="location-notes" placeholder="Any additional notes..."></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-location">Cancel</button>
-                <button class="btn btn-primary" id="save-location-modal">Save Location</button>
             </div>
         </div>
-    </div>
 
-    <!-- Modal for Setting Goals -->
-    <div class="modal" id="goal-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Set Writing Goal</h3>
-                <button class="modal-close" id="close-goal-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="daily-word-goal">Daily Word Goal</label>
-                    <input type="number" id="daily-word-goal" min="100" value="1000" step="100">
+        <!-- Modal for Setting Goals -->
+        <div class="modal" id="goal-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Set Writing Goal</h3>
+                    <button class="modal-close" id="close-goal-modal">
+                        &times;
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="weekly-word-goal">Weekly Word Goal</label>
-                    <input type="number" id="weekly-word-goal" min="1000" value="7000" step="500">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="daily-word-goal">Daily Word Goal</label>
+                        <input
+                            type="number"
+                            id="daily-word-goal"
+                            min="100"
+                            value="1000"
+                            step="100"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="weekly-word-goal">Weekly Word Goal</label>
+                        <input
+                            type="number"
+                            id="weekly-word-goal"
+                            min="1000"
+                            value="7000"
+                            step="500"
+                        />
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-goal">Cancel</button>
-                <button class="btn btn-primary" id="save-goal-modal">Save Goals</button>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancel-goal">
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary" id="save-goal-modal">
+                        Save Goals
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <span id="toast-message"></span>
-    </div>
+        <!-- Toast Notification -->
+        <div class="toast" id="toast">
+            <span id="toast-message"></span>
+        </div>
 
-    <script src="app.js"></script>
-</body>
+        <script src="app.js"></script>
+    </body>
 </html>
